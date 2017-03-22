@@ -1,0 +1,24 @@
+
+<% include ../partials/header %>
+<a href="/noticias/create">Noticia</a>
+<div class="container">
+    <% if(noticias.length > 0) { %>
+        <% for(var i = 0; i < noticias.length; i++) {%>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="noticia_wrapper">
+                        <a href="noticia?id_noticia=<%= noticias[i].id_noticia %>" class="noticia_titulo"><%=noticias[i].titulo%></a>
+                        <span class="noticia_data"><%=noticias[i].resumo%></span>
+                        <span class="noticia_autor"><%=noticias[i].autor%></span>
+                        <br />
+                        <p class="noticia_resumo">
+                            <%=noticias[i].noticia%>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+    <% } %>
+</div>
+
+<% include ../partials/footer %>
