@@ -11,7 +11,6 @@ module.exports = function(app) {
 				if (erro) {
 					console.log(erro);
 				}
-                console.log(noticias);
                 res.render('noticias/index', { noticias:noticias });
             });
 
@@ -31,45 +30,50 @@ module.exports = function(app) {
 			});
 		},
 
-        show: function(req, res) {
-            Noticia.findById(function(erro, usuario) {
-                var noticiaID = req.params.id;
-                var noticia = noticia.id(noticiaID);
-                var resultado = {
-                    noticia: noticia
-                };
-                res.render('contatos/show', resultado);
-            });
-        },
-
         edit: function(req, res) {
-            Usuario.findById(function(erro, data) {
-                var noticiaID = req.params.id;
-                var noticia = noticia.id(noticiaID);
-                var resultado = {
-                    noticia: noticia
-                };
-                res.render('noticias/edit', resultado);
+            Noticia.findById(req.params.id, function(erro, noticia) {
+                if(erro){
+                    console.log(erro);
+                }else{
+                    res.render('noticias/editar', {noticia: noticia});
+                }
             });
         },
 
-        update: function(req, res) {
-            Usuario.findById(function(erro, usuario) {
-                var noticiaID = req.params.id;
-                var noticia = usuario.noticia.id(noticiaID);
-                noticia.titulo = req.body.noticia.titulo;
-                noticia.resumo = req.body.noticia.resumo;
-				noticia.autor = req.body.noticia.autor;
-                noticia.save(function() {
-                    res.redirect('/noticias');
-                });
+        update: function(req,res){
+			Noticia.findById(req.params.id, function(err, data){
+				if(err){
+					console.log(err);
+				}else{
+					var model   = data;
+                    console.log(model);
+					model.titulo  = req.body.titulo;
+					model.resumo = req.body.resumo;
+					model.autor = req.body.autor;
+					model.save(function(err){
+						if(err){
+							console.log(err);
+						}else{
+                            res.redirect('/noticias');
+						}
+					});
+				}
+			});
+		},
+
+        show: function(req, res) {
+            Noticia.findById(req.params.id, function(erro, noticia) {
+                if(erro){
+                    console.log(erro);
+                }else{
+                    res.render('noticias/show', {noticia: noticia});
+                }
             });
         },
 
         destroy: function(req, res) {
-            Noticia.findById(function(erro, usuario) {
-                var noticiaID = req.params.id;
-                noticia.id(contatoID).remove();
+            Noticia.findById(function(erro, noticia) {
+                noticia._id(req.params.id).remove();
                 noticia.save(function() {
                     res.redirect('/noticias');
                 });

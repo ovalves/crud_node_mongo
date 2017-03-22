@@ -1,0 +1,24 @@
+
+<% include ../partials/header %>
+
+<a href="/noticias/create">Criar Noticia</a>
+<div class="container">
+    <% if(noticia) { %>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="noticia_wrapper">
+                    <span class="noticia_titulo"><%=noticia.titulo%></span>
+                    <span class="noticia_data"><%=noticia.resumo%></span>
+                    <span class="noticia_autor"><%=noticia.autor%></span>
+                    <br />
+                    <p class="noticia_resumo">
+                        <%=noticia.noticia%>
+                    </p>
+                    <a href="/noticias/editar/<%= noticia._id %>" class="noticia_titulo">Editar</a>
+                </div>
+            </div>
+        </div>
+    <% } %>
+</div>
+
+<% include ../partials/footer %>
