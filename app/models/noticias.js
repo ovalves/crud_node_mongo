@@ -6,7 +6,8 @@ module.exports = function(app) {
     var noticia = new Schema({
         titulo: String,
         resumo: String,
-        autor: String
+        autor: String,
+        data: {type: Date, default: Date.now}
     });
 
     return mongoose.model('Noticias', noticia);

@@ -7,8 +7,8 @@ module.exports = function(app){
     app.post('/noticias/create', noticias.insert);
 
     app.get('/noticias/editar/:id', noticias.edit);
-    app.post('/noticias/editar/:id', noticias.update);
-    app.get('/noticias/show/:id', noticias.show);
+    app.post('/noticia/editar/:id', noticias.update);
+    app.get('/noticia/show/:id', noticias.show);
     app.delete('/noticia/delete/:id', noticias.destroy);
 
 

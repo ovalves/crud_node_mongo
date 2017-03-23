@@ -16,6 +16,9 @@ var mongoose = require('mongoose');
 /* importar o módulo de menssagens flash */
 var flash = require('express-flash');
 
+// importar o módulo method-override
+var methodOverride = require('method-override');
+
 /* iniciar o objeto do express */
 var app = express();
 
@@ -34,6 +37,9 @@ app.use(express.static('./app/public'));
 
 /* configurar o middleware body-parser */
 app.use(bodyParser.urlencoded({extended: true}));
+
+// configurar o method-override
+app.use(methodOverride('_method'));
 
 /* configurar o middleware express-validator */
 app.use(expressValidator());

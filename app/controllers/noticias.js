@@ -72,13 +72,15 @@ module.exports = function(app) {
         },
 
         destroy: function(req, res) {
-            Noticia.findById(function(erro, noticia) {
-                noticia._id(req.params.id).remove();
-                noticia.save(function() {
-                    res.redirect('/noticias');
-                });
-            });
+            Noticia.remove({_id: req.params.id}, function(err, data){
+				if (err){
+					console.log(err);
+				}else{
+					res.redirect('/noticias');
+				}
+			});
         }
+
     }
 
     return NoticiaController;

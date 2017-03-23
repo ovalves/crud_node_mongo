@@ -33,7 +33,7 @@ img {
 }
 
 .site-logo {
-  background: url(../images/site-logo.png) 50% no-repeat;
+  background: url(../img/site-logo.png) 50% no-repeat;
   background-size: cover;
   height: 120px;
   width: 120px;
@@ -104,7 +104,7 @@ img {
 .welcome-card > .mdl-card__title {
   color: #fff;
   height: 290px;
-  background: url("../images/cover.jpg") center/cover;
+  background: url("../img/cover.jpg") center/cover;
 }
 
 .event-card {
