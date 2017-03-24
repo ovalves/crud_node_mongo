@@ -1,9 +1,9 @@
-module.exports = function(application){
-    application.get('/formulario_inclusao_noticia', function(req, res){
-        application.app.controllers.admin.formulario_inclusao_noticia(application, req, res);
-    });
+module.exports = function(app) {
 
-    application.post('/noticias/salvar', function(req, res){
-        application.app.controllers.admin.noticias_salvar(application, req, res);
-    });
-}
+  var admin = app.controllers.admin;
+
+  app.get('/admin', admin.index);
+  app.post('/admin/entrar', admin.login);
+  app.get('/sair', admin.logout);
+
+};

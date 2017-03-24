@@ -12,6 +12,16 @@ img {
   justify-content: center;
 }
 
+/* MDL Custom-Form */
+.custom-form {
+	align-items: center;
+	justify-content: center;
+}
+.custom-form__content {
+	padding: 24px;
+	flex: none;
+}
+
 .site-description {
   display: block;
   font-size: 14px;

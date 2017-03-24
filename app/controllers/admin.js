@@ -1,29 +1,40 @@
-module.exports.formulario_inclusao_noticia = function(application, req, res){
-	res.render("admin/form_add_noticia", {validacao : {}, noticia : {} });
-}
+module.exports = function(app) {
 
-module.exports.noticias_salvar = function(application, req, res){
-	var noticia = req.body;
-	console.log(noticia);
+  var Usuario = app.models.usuarios;
 
-	req.assert('titulo'      , 'Título é obrigatório').notEmpty();
-	req.assert('resumo'      , 'Resumo é obrigatório').notEmpty();
-	req.assert('resumo'      , 'Resumo deve conter entre 10 e 100 caracteres').len(10, 100);
-	req.assert('autor'       , 'Autor é obrigatório').notEmpty();
-	req.assert('data_noticia', 'Data é obrigatório').notEmpty().isDate({format: 'YYYY-MM-DD'});
-	req.assert('noticia'     , 'Título é obrigatório').notEmpty();
+  var AdminController = {
+    index: function(req, res) {
+      res.render('admin/index');
+    },
 
-	var erros = req.validationErrors();
+    login: function(req, res) {
+		var query = req.body;
+		console.log(query);
+		Usuario.findOne(query)
+ 			.select('email password')
+			.exec(function(erro, usuario){
+			if (usuario) {
+				req.session.usuario = usuario;
+				res.redirect('/noticias');
+			} else {
+			  	Usuario.create(req.body, function(erro, usuario) {
+				    if(erro){
+			      		res.redirect('/');
+				    }else{
+			      		req.session.usuario = usuario;
+			      		res.redirect('/logout');
+				    }
+			  	});
+			}
+		});
+    },
 
-	if(erros){
-		res.render("admin/form_add_noticia", {validacao : erros, noticia :noticia});
-		return;
-	}
+    logout: function(req, res) {
+      req.session.destroy();
+      res.redirect('/');
+    }
+  };
 
-	var connection = application.config.dbConnection();
-	var noticiasModel = new application.app.models.NoticiasDAO(connection);
+  return AdminController;
 
-	noticiasModel.salvarNoticia(noticia, function(error, result){
-		res.redirect('/noticias');
-	});
-}
+};
