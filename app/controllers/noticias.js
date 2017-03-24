@@ -13,7 +13,6 @@ module.exports = function(app) {
 				}
                 res.render('noticias/index', { noticias:noticias });
             });
-
         },
 
         create: function(req, res) {

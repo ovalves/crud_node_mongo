@@ -32,10 +32,10 @@ var app = express();
 
 var cookie = cookieParser(cfg.SECRET);
 
-mongoose.connect('mongodb://localhost/CRUD', function(err){
-  if (err){
-    console.log('Erro ao conectar no mongodb: '+err);
-  }
+mongoose.connect('mongodb://localhost/CRUD', function(err) {
+    if (err) {
+        console.log('Erro ao conectar no mongodb: ' + err);
+    }
 });
 
 /* setar as variáveis 'view engine' e 'views' do express */
@@ -43,16 +43,18 @@ app.set('view engine', 'ejs');
 app.set('views', './app/views');
 app.use(cookie);
 app.use(expressSession({
-  secret: cfg.SECRET,
-  name: cfg.KEY,
-  resave: false,
-  saveUninitialized: false
+    secret: cfg.SECRET,
+    name: cfg.KEY,
+    resave: false,
+    saveUninitialized: false
 }));
 /* configurar o middleware express.static */
 app.use(express.static('./app/public'));
 
 /* configurar o middleware body-parser */
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 // configurar o method-override
 app.use(methodOverride('_method'));
@@ -60,11 +62,13 @@ app.use(methodOverride('_method'));
 /* configurar o middleware express-validator */
 app.use(expressValidator());
 
-consign({cwd: 'app'})
-	.include('models')
-	.then('controllers')
-	.then('routes')
-	.into(app);
+consign({
+        cwd: 'app'
+    })
+    .include('models')
+    .then('controllers')
+    .then('routes')
+    .into(app);
 
 /* exportar o objeto app */
 module.exports = app;

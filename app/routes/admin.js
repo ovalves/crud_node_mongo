@@ -1,9 +1,10 @@
 module.exports = function(app) {
 
-  var admin = app.controllers.admin;
+    var admin = app.controllers.admin;
+    var autenticar = require('./../middlewares/autenticador');
 
-  app.get('/admin', admin.index);
-  app.post('/admin/entrar', admin.login);
-  app.get('/sair', admin.logout);
+    app.get('/admin', admin.index);
+    app.post('/admin', admin.login);
+    app.get('/sair', admin.logout);
 
 };

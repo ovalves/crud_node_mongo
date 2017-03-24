@@ -1,8 +1,9 @@
 module.exports = function(app){
 
     var noticias = app.controllers.noticias;
+    var autenticar = require('./../middlewares/autenticador');
 
-    app.get('/noticias', noticias.index);
+    app.get('/noticias', autenticar, noticias.index);
     app.get('/noticias/create', noticias.create);
     app.post('/noticias/create', noticias.insert);
 
