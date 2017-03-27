@@ -1,3 +1,13 @@
+/* MDL Custom-Form */
+.custom-form {
+  align-items: center;
+	justify-content: center;
+}
+.custom-form__content {
+	padding: 24px;
+	flex: none;
+}
+
 img {
   max-width: 100%;
 }
@@ -10,16 +20,6 @@ img {
   padding: 0;
   -ms-flex-pack: center;
   justify-content: center;
-}
-
-/* MDL Custom-Form */
-.custom-form {
-	align-items: center;
-	justify-content: center;
-}
-.custom-form__content {
-	padding: 24px;
-	flex: none;
 }
 
 .site-description {

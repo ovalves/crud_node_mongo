@@ -1,7 +1,0 @@
-{
-    "SECRET": "CRUDMONGO",
-    "KEY": "cmongo.sid",
-    "MAX_AGE": {
-      "maxAge": 3600000
-    }
-  }

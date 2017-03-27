@@ -1,7 +1,5 @@
 /* importar o módulo do framework express */
 var express = require('express');
-// Carrega as configs de key secret da app
-var cfg = require('./config.json');
 
 /* importar o módulo do consign */
 var consign = require('consign');
@@ -30,8 +28,6 @@ var expressSession = require('express-session');
 /* iniciar o objeto do express */
 var app = express();
 
-var cookie = cookieParser(cfg.SECRET);
-
 mongoose.connect('mongodb://localhost/CRUD', function(err) {
     if (err) {
         console.log('Erro ao conectar no mongodb: ' + err);
@@ -41,13 +37,14 @@ mongoose.connect('mongodb://localhost/CRUD', function(err) {
 /* setar as variáveis 'view engine' e 'views' do express */
 app.set('view engine', 'ejs');
 app.set('views', './app/views');
-app.use(cookie);
+
+/* configura o middleware express-session */
 app.use(expressSession({
-    secret: cfg.SECRET,
-    name: cfg.KEY,
-    resave: false,
-    saveUninitialized: false
+	secret: 'hakjehrgkjahjer',
+	resave: false,
+	saveUninitialized: false
 }));
+
 /* configurar o middleware express.static */
 app.use(express.static('./app/public'));
 
@@ -67,7 +64,7 @@ consign({
     })
     .include('models')
     .then('controllers')
-    .then('routes')
+	.then('routes')
     .into(app);
 
 /* exportar o objeto app */
