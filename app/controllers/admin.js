@@ -44,6 +44,17 @@ module.exports = function(app, req) {
 	   		res.render('admin/index', { usuario:usuario });
 	   },
 
+       	list: function(req, res) {
+			var usuario = req.session.usuario;
+			Noticia.find(function(erro, noticias){
+				if (erro) {
+					console.log(erro);
+				}
+			   	res.render('admin/list-noticia', { usuario:usuario, noticias:noticias });
+		   	});
+
+      	},
+
 	   create: function(req, res) {
 		   var usuario = req.session.usuario;
 		   res.render('admin/create-noticia', { usuario:usuario });
@@ -56,6 +67,27 @@ module.exports = function(app, req) {
 				   console.log(erro);
 			   }
 			   res.redirect('/admin/index');
+		   });
+	   },
+
+	   	edit: function(req, res) {
+			var usuario = req.session.usuario;
+		   	Noticia.findById(req.params.id, function(erro, noticia) {
+			   	if(erro){
+				   console.log(erro);
+			   	}else{
+				   res.render('admin/edit-noticia', { usuario:usuario, noticia: noticia });
+			   	}
+		   	});
+	   	},
+
+	   	destroy: function(req, res) {
+		   Noticia.remove({_id: req.params.id}, function(err, data){
+			   if (err){
+				   console.log(err);
+			   }else{
+				   res.redirect('/admin/noticias/list');
+			   }
 		   });
 	   },
 

@@ -1,0 +1,50 @@
+<% include ../partials/admin/header %>
+
+	<% include ../partials/admin/navbar %>
+		<div class="mdl-layout custom-form custom-margin-auto">
+			<main class="mdl-layout__content custom-margin__content">
+				<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+					<thead>
+						<tr>
+							<th class="mdl-data-table__cell--non-numeric">Título</th>
+							<th>Resumo</th>
+							<th>Autor</th>
+							<th>Editar</th>
+							<th>Deletar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% if(noticias.length > 0) { %>
+							<% for(var i = 0; i < noticias.length; i++) {%>
+								<tr>
+									<td class="mdl-data-table__cell--non-numeric">
+										<a href="/noticia/show/<%= noticias[i]._id %>">
+											<%=noticias[i].titulo%>
+										</a>
+									</td>
+
+									<td>
+										<%=noticias[i].resumo%>
+									</td>
+
+									<td>
+										<%=noticias[i].autor%>
+									</td>
+									<td>
+										<a href="/admin/noticias/editar/<%= noticias[i]._id %>" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent">Editar</a>
+									</td>
+									<td>
+										<div class="mdl-card__actions mdl-card--border">
+						                    <form action="/admin/noticias/delete/<%= noticias[i]._id %>?_method=DELETE" method="post" class="well form-inline">
+						                        <button type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent">Excluir</button>
+						                    </form>
+						                </div>
+									</td>
+								</tr>
+							<% } %>
+						<% } %>
+					</tbody>
+				</table>
+			</main>
+		</div>
+<% include ../partials/admin/footer %>

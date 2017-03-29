@@ -6,8 +6,11 @@ module.exports = function(app) {
     app.get('/admin', admin.index);
     app.post('/admin', admin.login);
     app.get('/admin/index', autenticar, admin.dashboard);
-    app.get('/admin/noticia/create', autenticar,  admin.create);
-    app.post('/admin/create-noticia', autenticar, admin.insert);
+    app.get('/admin/noticias/list', autenticar, admin.list);
+    app.get('/admin/noticias/create', autenticar,  admin.create);
+    app.post('/admin/noticias/create-noticia', autenticar, admin.insert);
+    app.get('/admin/noticias/editar/:id', autenticar, admin.edit)
+    app.delete('/admin/noticias/delete/:id', autenticar, admin.destroy);
     app.get('/sair', admin.logout);
 
 };

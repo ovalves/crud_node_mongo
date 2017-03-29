@@ -19,13 +19,16 @@ html, body {
 }
 
 /* MDL Custom-Form */
-.custom-form {
-	align-items: center;
+.custom-form, .custom-margin-auto {
+  align-items: center;
 	justify-content: center;
 }
 .custom-form__content {
 	padding: 24px;
 	flex: none;
+}
+.custom-margin__content {
+	padding: 24px;
 }
 
 .demo-avatar {
