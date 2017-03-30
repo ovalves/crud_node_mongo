@@ -81,6 +81,27 @@ module.exports = function(app, req) {
 		   	});
 	   	},
 
+        update: function(req,res){
+			Noticia.findById(req.params.id, function(err, data){
+				if(err){
+					console.log(err);
+				}else{
+					var model  = data;
+                    console.log(model);
+					model.titulo  = req.body.titulo;
+					model.resumo = req.body.resumo;
+					model.autor = req.body.autor;
+					model.save(function(err){
+						if(err){
+							console.log(err);
+						}else{
+                            res.redirect('/admin/index');
+						}
+					});
+				}
+			});
+		},
+
 	   	destroy: function(req, res) {
 		   Noticia.remove({_id: req.params.id}, function(err, data){
 			   if (err){

@@ -18,13 +18,6 @@
                         <%=noticia.autor%>
                     </a>
                 </div>
-
-                <div class="mdl-card__actions mdl-card--border">
-                    <form action="/noticia/<%= noticia._id %>?_method=DELETE" method="post" class="well form-inline">
-                        <a href="/noticias/editar/<%= noticia._id %>" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent">Editar</a>
-                        <button type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent">Excluir</button>
-                    </form>
-                </div>
             </div>
         </div>
     <% } %>

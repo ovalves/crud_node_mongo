@@ -10,6 +10,7 @@ module.exports = function(app) {
     app.get('/admin/noticias/create', autenticar,  admin.create);
     app.post('/admin/noticias/create-noticia', autenticar, admin.insert);
     app.get('/admin/noticias/editar/:id', autenticar, admin.edit)
+    app.post('/admin/noticias/editar/:id', autenticar, admin.update);
     app.delete('/admin/noticias/delete/:id', autenticar, admin.destroy);
     app.get('/sair', admin.logout);
 
